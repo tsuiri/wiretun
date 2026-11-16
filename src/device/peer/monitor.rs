@@ -196,6 +196,7 @@ impl PeerMonitor {
             rx_messages: self.traffic.rx_messages.load(Ordering::Relaxed),
             tx_bytes: self.traffic.tx_bytes.load(Ordering::Relaxed),
             rx_bytes: self.traffic.rx_bytes.load(Ordering::Relaxed),
+            last_recv_at: self.traffic.last_recv_at.to_std(),
             last_handshake_at: self.handshake.last_complete_ts.to_std(),
         }
     }
@@ -206,5 +207,6 @@ pub struct PeerMetrics {
     pub rx_messages: u64,
     pub tx_bytes: u64,
     pub rx_bytes: u64,
+    pub last_recv_at: Instant,
     pub last_handshake_at: SystemTime,
 }
